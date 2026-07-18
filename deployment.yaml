@@ -18,8 +18,8 @@ spec:
 
     spec:
       containers:
-      - name: nginx
-        image: nginx:latest
+      - name: devsecops-demo
+        image: wejdenehm/devsecops-demo:latest
 
         ports:
-        - containerPort: 80
+        - containerPort: 5000
