@@ -20,6 +20,6 @@ spec:
       containers:
       - name: devsecops-demo
         image: wejdenehm/devsecops-demo:latest
-
+        imagePullPolicy: Always
         ports:
         - containerPort: 8080
