@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: devsecops-demo
-        image: wejdenehm/devsecops-demo:78e67918229c0dc07f7cec09eabd5fae963cd04e
+        image: wejdenehm/devsecops-demo:8f6d54e0ec921d0e57617dc0c31ba34eba9123b6
         imagePullPolicy: Always
         ports:
         - containerPort: 5000
