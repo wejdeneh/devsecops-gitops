@@ -22,4 +22,4 @@ spec:
         image: wejdenehm/devsecops-demo:latest
 
         ports:
-        - containerPort: 5000
+        - containerPort: 8080
