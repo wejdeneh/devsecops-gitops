@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: devsecops-demo
-        image: wejdenehm/devsecops-demo:latest
+        image: wejdenehm/devsecops-demo:abc123456
 
         ports:
         - containerPort: 8080
