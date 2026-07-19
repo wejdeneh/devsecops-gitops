@@ -22,4 +22,4 @@ spec:
         image: wejdenehm/devsecops-demo:607bb345ee64ec6800253974039a1c985c4d17f4
         imagePullPolicy: Always
         ports:
-        - containerPort: 8080
+        - containerPort: 5000
