@@ -5,6 +5,7 @@ metadata:
   name: {{ include "devsecops-demo.fullname" . }}
 
 spec:
+
   replicas: {{ .Values.replicaCount }}
 
   selector:
@@ -17,7 +18,14 @@ spec:
       labels:
         app: {{ include "devsecops-demo.name" . }}
 
+
     spec:
+
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: {{ .Values.securityContext.runAsUser }}
+        fsGroup: 1000
+
 
       containers:
 
@@ -27,13 +35,42 @@ spec:
 
         imagePullPolicy: {{ .Values.image.pullPolicy }}
 
+
         ports:
 
         - containerPort: {{ .Values.containerPort }}
 
-        resources:
-          {{- toYaml .Values.resources | nindent 10 }}
 
         securityContext:
-          runAsNonRoot: {{ .Values.securityContext.runAsNonRoot }}
-          runAsUser: {{ .Values.securityContext.runAsUser }}
+
+          allowPrivilegeEscalation: false
+
+          readOnlyRootFilesystem: false
+
+          capabilities:
+            drop:
+              - ALL
+
+
+        resources:
+
+          {{- toYaml .Values.resources | nindent 10 }}
+readinessProbe:
+
+  httpGet:
+    path: /health
+    port: 5000
+
+  initialDelaySeconds: 5
+  periodSeconds: 10
+
+
+
+livenessProbe:
+
+  httpGet:
+    path: /health
+    port: 5000
+
+  initialDelaySeconds: 15
+  periodSeconds: 20
