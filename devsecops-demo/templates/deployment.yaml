@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: {{ include "devsecops-demo.fullname" . }}
+
+spec:
+
+  replicas:
+    {{ .Values.replicaCount }}
+
+  selector:
+    matchLabels:
+      app:
+        {{ include "devsecops-demo.name" . }}
+
+  template:
+
+    metadata:
+
+      labels:
+        app:
+          {{ include "devsecops-demo.name" . }}
+
+
+    spec:
+
+      containers:
+
+      - name:
+          {{ .Chart.Name }}
+
+        image:
+          "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+
+
+        imagePullPolicy:
+          {{ .Values.image.pullPolicy }}
+
+
+        ports:
+
+        - containerPort:
+            {{ .Values.containerPort }}
+
+
+        resources:
+
+          {{- toYaml .Values.resources | nindent 10 }}

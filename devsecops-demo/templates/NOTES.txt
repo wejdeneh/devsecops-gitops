@@ -1,0 +1,16 @@
+DevSecOps Demo deployed successfully 🚀
+
+Release:
+{{ .Release.Name }}
+
+Namespace:
+{{ .Release.Namespace }}
+
+Service:
+{{ include "devsecops-demo.fullname" . }}
+
+Check status:
+
+kubectl get pods -n {{ .Release.Namespace }}
+
+kubectl get svc -n {{ .Release.Namespace }}

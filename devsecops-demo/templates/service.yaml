@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Service
+
+
+metadata:
+
+  name:
+    {{ include "devsecops-demo.fullname" . }}
+
+
+spec:
+
+  type:
+    {{ .Values.service.type }}
+
+
+  selector:
+
+    app:
+      {{ include "devsecops-demo.name" . }}
+
+
+  ports:
+
+  - port:
+      {{ .Values.service.port }}
+
+    targetPort:
+      {{ .Values.service.targetPort }}
+
+    nodePort:
+      {{ .Values.service.nodePort }}

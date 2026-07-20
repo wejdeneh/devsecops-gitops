@@ -1,0 +1,33 @@
+replicaCount: 2
+
+image:
+  repository: wejdenehm/devsecops-demo
+  tag: latest
+  pullPolicy: Always
+
+
+service:
+  type: NodePort
+  port: 80
+  targetPort: 5000
+  nodePort: 30090
+
+
+httpRoute:
+  enabled: false
+  hostname: ""
+
+
+securityContext:
+  enabled: true
+  runAsNonRoot: true
+  runAsUser: 1000
+
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+  limits:
+    cpu: 500m
+    memory: 512Mi
