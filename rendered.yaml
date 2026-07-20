@@ -50,6 +50,7 @@ spec:
         runAsUser: 1000
         fsGroup: 1000
 
+
       containers:
 
       - name: devsecops-demo
@@ -58,11 +59,29 @@ spec:
 
         imagePullPolicy: Always
 
+
+        env:
+
+        - name: APP_VERSION
+          value: "latest"
+
+        - name: BUILD_DATE
+          value: "unknown"
+
+        - name: BUILD_BRANCH
+          value: "main"
+
+        - name: BUILD_COMMIT
+          value: "unknown"
+
+
+
         ports:
 
         - name: http
           containerPort: 5000
           protocol: TCP
+
 
 
         livenessProbe:
@@ -75,6 +94,7 @@ spec:
           periodSeconds: 20
 
 
+
         readinessProbe:
 
           httpGet:
@@ -83,6 +103,7 @@ spec:
 
           initialDelaySeconds: 5
           periodSeconds: 10
+
 
 
 

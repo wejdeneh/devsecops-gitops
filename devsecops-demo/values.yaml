@@ -34,3 +34,8 @@ resources:
   limits:
     cpu: 500m
     memory: 512Mi
+env:
+  APP_VERSION: "latest"
+  BUILD_DATE: "unknown"
+  BUILD_BRANCH: "main"
+  BUILD_COMMIT: "unknown"

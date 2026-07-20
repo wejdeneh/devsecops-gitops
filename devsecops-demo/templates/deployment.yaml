@@ -27,6 +27,7 @@ spec:
         runAsUser: {{ .Values.securityContext.runAsUser }}
         fsGroup: 1000
 
+
       containers:
 
       - name: {{ .Chart.Name }}
@@ -35,11 +36,29 @@ spec:
 
         imagePullPolicy: {{ .Values.image.pullPolicy }}
 
+
+        env:
+
+        - name: APP_VERSION
+          value: {{ .Values.env.APP_VERSION | quote }}
+
+        - name: BUILD_DATE
+          value: {{ .Values.env.BUILD_DATE | quote }}
+
+        - name: BUILD_BRANCH
+          value: {{ .Values.env.BUILD_BRANCH | quote }}
+
+        - name: BUILD_COMMIT
+          value: {{ .Values.env.BUILD_COMMIT | quote }}
+
+
+
         ports:
 
         - name: http
           containerPort: 5000
           protocol: TCP
+
 
 
         livenessProbe:
@@ -52,6 +71,7 @@ spec:
           periodSeconds: 20
 
 
+
         readinessProbe:
 
           httpGet:
@@ -60,6 +80,7 @@ spec:
 
           initialDelaySeconds: 5
           periodSeconds: 10
+
 
 
 
