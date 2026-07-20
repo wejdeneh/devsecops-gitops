@@ -3,6 +3,8 @@ kind: Deployment
 
 metadata:
   name: {{ include "devsecops-demo.fullname" . }}
+  labels:
+    app: {{ include "devsecops-demo.name" . }}
 
 spec:
 
@@ -18,14 +20,12 @@ spec:
       labels:
         app: {{ include "devsecops-demo.name" . }}
 
-
     spec:
 
       securityContext:
-        runAsNonRoot: true
+        runAsNonRoot: {{ .Values.securityContext.runAsNonRoot }}
         runAsUser: {{ .Values.securityContext.runAsUser }}
         fsGroup: 1000
-
 
       containers:
 
@@ -35,42 +35,46 @@ spec:
 
         imagePullPolicy: {{ .Values.image.pullPolicy }}
 
-
         ports:
 
-        - containerPort: {{ .Values.containerPort }}
+        - name: http
+          containerPort: 5000
+          protocol: TCP
+
+
+        livenessProbe:
+
+          httpGet:
+            path: /health
+            port: 5000
+
+          initialDelaySeconds: 15
+          periodSeconds: 20
+
+
+        readinessProbe:
+
+          httpGet:
+            path: /health
+            port: 5000
+
+          initialDelaySeconds: 5
+          periodSeconds: 10
+
 
 
         securityContext:
 
           allowPrivilegeEscalation: false
 
-          readOnlyRootFilesystem: false
-
           capabilities:
             drop:
-              - ALL
+            - ALL
+
+          readOnlyRootFilesystem: false
+
 
 
         resources:
 
           {{- toYaml .Values.resources | nindent 10 }}
-readinessProbe:
-
-  httpGet:
-    path: /health
-    port: 5000
-
-  initialDelaySeconds: 5
-  periodSeconds: 10
-
-
-
-livenessProbe:
-
-  httpGet:
-    path: /health
-    port: 5000
-
-  initialDelaySeconds: 15
-  periodSeconds: 20
