@@ -6,6 +6,9 @@ image:
   pullPolicy: Always
 
 
+containerPort: 5000
+
+
 service:
   type: NodePort
   port: 80
