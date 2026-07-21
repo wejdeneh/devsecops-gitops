@@ -1,4 +1,4 @@
-````markdown
+
 # DevSecOps GitOps Repository
 
 ## Overview
