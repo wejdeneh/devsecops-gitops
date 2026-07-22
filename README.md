@@ -279,7 +279,7 @@ Contains:
 
 **Wejden Haj Mefteh**
 
-Cloud Engineering Student | Certified Kubernetes Administrator (CKA)
+Cloud Engineering X CyberSecurity  | Certified Kubernetes Administrator (CKA)
 
 Focused on Cloud Native Platforms, Kubernetes Security, GitOps, Platform Engineering, and DevSecOps Automation.
 
